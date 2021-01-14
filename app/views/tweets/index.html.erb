@@ -1,6 +1,8 @@
 <div class="wrapper">
 <h1>Home</h1>
-<%= render 'form' %>
+<% if current_user %>
+  <%= render 'form' %>
+<% end %>
 <ul class="tweets">
 <% @tweets.each do |tweet| %>
   <li class="tweet">
