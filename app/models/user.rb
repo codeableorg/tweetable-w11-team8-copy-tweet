@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  enum.role: {
+  enum role: {
     member: 0,
     admin: 1
   }
@@ -10,5 +10,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   # email and password was create when we  was creating devise User
-  validates :name, presence: true
+  validates :name, :username, presence: true
 end

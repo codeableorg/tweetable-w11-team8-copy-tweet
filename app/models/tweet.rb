@@ -6,6 +6,6 @@ class Tweet < ApplicationRecord
                      dependent: :destroy,
                      inverse_of: false
   belongs_to :replied_to, class_name: 'Tweet', optional: true
-  validates :body, presence: true, length: { maximum:150 }
-  validate :replies_count, :likes_count, default: 0, numericality: { only_integer: true }
+  validates :body, presence: true, length: { maximum: 150 }
+  validates :replies_count, :likes_count, numericality: { only_integer: true }
 end
