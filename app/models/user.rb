@@ -11,5 +11,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   # email and password was create when we  was creating devise User
-  validates :name, :username, presence: true
+  validates :name, presence: true
+  validates :username, presence: true, uniqueness: true
 end
