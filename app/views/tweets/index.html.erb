@@ -25,7 +25,9 @@
             <div class="tweet__icons-right">
               <%= image_tag 'retweet.svg' %>
               <span><%= tweet.replies.size %></span>
+              <%= button_to tweet_likes_path(@tweet), method: :tweet %>
               <%= image_tag 'like.svg' %>
+              <p><%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
             </div>
         <% end %>
           <% if current_user %>
