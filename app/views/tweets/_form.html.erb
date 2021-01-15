@@ -1,0 +1,4 @@
+<%= form_for [Tweet.new] do |form| %>
+    <%= form.text_area :body, class: "tweet_input", placeholder: "What's happening?" %>
+    <%= form.submit value: "Tweet", class: "btn" %>
+<% end %>
