@@ -1,0 +1,20 @@
+<h1>Tweet Detail</h1>
+<%= @tweet.body %>
+<%= @tweet.user.name %>
+<span>@<%= @tweet.user.username %></span>
+<% if current_user %>
+  <%= form_with model: [@reply] do |form| %>
+    <%= form.hidden_field :replied_to_id, value: @reply.replied_to_id%>
+    <%= form.text_area :body, class: "tweet_input", placeholder: "Tweet your reply" %>
+    <%= form.submit value: "Tweet", class: "btn" %>
+  <% end %>
+<% end %>
+<ul>
+    <% @tweet.replies.each do |reply| %>
+      <li class="">
+          <%= reply.body %>
+          <%# <%= reply.user %>
+          <%# <span>@<%= reply.user.username</span> %>
+      </li>
+    <% end %>
+  </ul>

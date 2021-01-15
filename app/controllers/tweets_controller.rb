@@ -5,6 +5,9 @@ class TweetsController < ApplicationController
 
   def show
     @tweet = Tweet.find(params[:id])
+    @reply = Tweet.new
+    @reply.replied_to = @tweet
+    
   end
 
   def new
@@ -20,8 +23,12 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
     @tweet.save
-
-    redirect_to tweets_path
+    if tweet_params[:replied_to_id]
+      redirect_to tweet_path(@tweet.replied_to)
+    else
+      redirect_to tweets_path
+    end
+    
   end
 
   def update
@@ -44,6 +51,6 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:body, :user_id)
+    params.require(:tweet).permit(:body, :user_id, :replied_to_id)
   end
 end
