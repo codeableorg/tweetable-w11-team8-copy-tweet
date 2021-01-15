@@ -8,8 +8,12 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <header>
-      <div class="current_session">
+    <div class="home">
+      <aside class="home-aside">
+        <h3 class="tweetable typo__large">
+          { <span class="tweetable__text">Tweet</span>able }
+        <h3>
+        <div class="current_session">
           <% if current_user %>
             <%=link_to current_user.username, edit_user_registration_path%>
             <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'button button-category button-session' %>
@@ -17,9 +21,12 @@
             <%= link_to "Signin", new_user_session_path, class: 'button button-category button-session' %>
           <% end %>
         </div>
-    </header>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+      </aside>
+      <div>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

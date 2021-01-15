@@ -1,23 +1,41 @@
-<div class="wrapper">
-<h1>Home</h1>
-<% if current_user %>
-  <%= render 'form' %>
-<% end %>
-<ul class="tweets">
-<% @tweets.each do |tweet| %>
-  <li class="tweet">
-    <%# <%= link_to tweet_comments_path(tweet) do %>
-      <%= tweet.body %>
-      <%= tweet.user.name %>
-      <span>@<%= tweet.user.username %></span>
-    <%# <% end %>
-    <% if current_user %>  
-      <div class='c'>
-        <span><%= link_to edit_tweet_path(tweet) do%><%= image_tag('update.png') %><% end %></span>
-        <span><%= link_to tweet_path(tweet), method: :delete, data: { confirm: "Are you sure you want to delete this tweet?" } do %> <%= image_tag('delete.png')%><% end %> </span>
+<div class="home-header">
+  <header class="header">
+      <h2 class="typo__bold typo__large">Home</h2>
+  </header>
+</div>
+<div class="home-content">
+  <% if current_user %>
+    <%= render 'form' %>
+  <% end %>
+  <% @tweets.each do |tweet| %>
+    <div class="tweet__container">
+      <div class="tweet__image">
+        <%= image_tag 'default.png', class:'image__circle image__small' %>
       </div>
-      <% end %>
-    
-  </li>
-<% end %>
-</ul>
+      <div class="tweet__content">
+        <div class="tweet__head">
+          <div class="typo__medium typo__bold color-main"><%= tweet.user.name %></div>
+          <div class="typo__medium typo__regular color-alter">@<%= tweet.user.username %></div>
+          <div class="typo__small typo__regular color-alter"><%= tweet.user.created_at %></div>
+        </div>
+        <p><%= tweet.body %></p>
+        <div class="tweet__icons">
+          <div class="tweet__icons-right">
+            <%= image_tag 'retweet.svg' %>
+            <%= image_tag 'like.svg' %>
+          </div>
+          <% if current_user %>
+            <div class="tweet__icons-left">
+              <%= link_to edit_tweet_path(tweet) do%>
+                <%= image_tag 'edit.svg' %>
+              <% end %>
+              <%= link_to tweet_path(tweet), method: :delete, data: { confirm: "Are you sure you want to delete this tweet?" } do %>
+                <%= image_tag 'delete.svg' %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

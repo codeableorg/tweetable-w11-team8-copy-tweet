@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400;1,500&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/*Variables for all scss files */
+/* GLOBAL COLORS */
+$primary-color: #1DA1F2;
+$primary-hover-color: #1B95E0;
+$primary-disable-color: #9AD0F9;
+$primary-text-color: #0F1419;
+$secundary-text-color: #5B7083;
+$background1-color: #EBEEF0;
+$background2-color: #F7F9FA;
+$alternative-text-color: #111111;
+$primary-alternative-color: #ffffff;
+$error-color: #DD2E44;
+
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: $background1-color;
+  display: flex;
+  justify-content: center;
+}

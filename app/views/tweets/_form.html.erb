@@ -1,4 +1,11 @@
 <%= form_for [Tweet.new] do |form| %>
-    <%= form.text_area :body, class: "tweet_input", placeholder: "What's happening?" %>
-    <%= form.submit value: "Tweet", class: "btn" %>
+    <div class="tweet__container">
+      <div class="tweet__image">
+        <%= image_tag 'default.png', class:'image__circle image__small' %>
+      </div>
+      <div class="form__tweet">
+        <%= form.text_area :body, class: "tweet_area", placeholder: "What's happening?" %>
+        <%= form.submit value: "Tweet", class: "button__primary button__medium" %>
+      </div>
+    </div>
 <% end %>
