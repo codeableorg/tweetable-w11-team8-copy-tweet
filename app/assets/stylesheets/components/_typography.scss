@@ -1,0 +1,45 @@
+@import './global';
+
+@mixin typo {
+  font-family: Roboto;
+  font-style: normal;
+  letter-spacing: 0em;
+}
+
+.typo{
+  &__extra-large{
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  &__large{
+    @include typo;
+    //styleName: L Bold;
+    font-size: 20px;
+    line-height: 32px;
+  }
+  &__medium{
+    @include typo;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  &__small{
+    @include typo;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  &__extra-small{
+    @include typo;
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+.typo__bold{
+  font-weight: 600;
+}
+
+.typo__regular{
+  font-weight: 400;
+}
+

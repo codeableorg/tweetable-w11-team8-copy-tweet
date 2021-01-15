@@ -1,0 +1,41 @@
+<div class="home">
+  <aside class="home-aside">
+    <h3 class="tweetable typo__large">
+      { <span class="tweetable__text">Tweet</span>able }
+    <h3>
+  </aside>
+  <div>
+    <div class="home-header">
+      <header class="header">
+          <h2 class="typo__regular typo__large">Home</h2>
+      </header>
+    </div>
+    <div class="home-content">
+      <% @tweets.each do |tweet| %>
+        <div class="tweet__container">
+          <div class="tweet__image">
+            <%= image_tag 'default.png', class:'image__circle image__small' %>
+          </div>
+          <div class="tweet__content">
+            <div class="tweet__head">
+              <div><%= tweet.user.name %></div>
+              <div>@<%= tweet.user.username %></div>
+              <div><%= tweet.user.created_at %></div>
+            </div>
+            <p><%= tweet.body %></p>
+            <div class="tweet__icons">
+              <div class="tweet__icons-right">
+                <%= image_tag 'retweet.svg' %>
+                <%= image_tag 'like.svg' %>
+              </div>
+              <div class="tweet__icons-left">
+                <%= image_tag 'edit.svg' %>
+                <%= image_tag 'delete.svg' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

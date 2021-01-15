@@ -1,0 +1,60 @@
+@import './global';
+
+@mixin center-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin large-btn {
+  height: 56px;
+  width: 145px;
+  border-radius: 100px;
+  padding: 16px;
+}
+
+@mixin medium-btn {
+  height: 40px;
+  border-radius: 100px;
+  padding: 8px, 16px, 8px, 16px;
+  
+}
+
+@mixin small-btn {
+  height: 32px;
+  border-radius: 100px;
+  padding: 4px, 16px, 4px, 16px;
+}
+
+.button{
+  &__large{
+    @include large-btn
+  }
+
+  &__medium{
+    @include medium-btn
+  }
+
+  &__small{
+    @include small-btn
+  }
+
+  &__primary{
+    @include center-content;
+    background-color: $primary-color;
+    color: $primary-alternative-color;
+    border: none;
+  }
+  &__secundary{
+    @include center-content;
+    background-color: transparent;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+  }
+  &__alternative{
+    @include center-content;
+    background-color: $background2-color;
+    border: 1px solid $primary-text-color;
+    color: $primary-text-color;
+  }
+}
