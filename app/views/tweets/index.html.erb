@@ -8,6 +8,7 @@
     <%= render 'form' %>
   <% end %>
   <% @tweets.each do |tweet| %>
+  
     <div class="tweet__container">
       <div class="tweet__image">
         <%= image_tag 'default.png', class:'image__circle image__small' %>
@@ -18,12 +19,15 @@
           <div class="typo__medium typo__regular color-alter">@<%= tweet.user.username %></div>
           <div class="typo__small typo__regular color-alter"><%= tweet.user.created_at %></div>
         </div>
-        <p><%= tweet.body %></p>
-        <div class="tweet__icons">
-          <div class="tweet__icons-right">
-            <%= image_tag 'retweet.svg' %>
-            <%= image_tag 'like.svg' %>
-          </div>
+        <%= link_to tweet_path(tweet) do %>
+          <p><%= tweet.body %></p>
+          <div class="tweet__icons">
+            <div class="tweet__icons-right">
+              <%= image_tag 'retweet.svg' %>
+              <span><%= tweet.replies.size %></span>
+              <%= image_tag 'like.svg' %>
+            </div>
+        <% end %>
           <% if current_user %>
             <div class="tweet__icons-left">
               <%= link_to edit_tweet_path(tweet) do%>
