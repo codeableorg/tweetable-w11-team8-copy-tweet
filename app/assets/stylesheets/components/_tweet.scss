@@ -1,0 +1,44 @@
+@import './global';
+
+.tweet{
+  &__container{
+    background-color: $primary-alternative-color;
+    display: grid;
+    grid-template-columns: 58px 510px ;
+    width: 600px;
+    padding: 8px 16px;
+    border: 1px solid $background1-color;
+  }
+
+  &__content{
+    display:grid;
+    grid-template-rows: 24px auto 24px;
+    gap: 8px;
+  }
+
+  &__head{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  &__icons{
+    height: 24px;
+    width: 510px;
+    display:flex;
+    justify-content:space-between;
+    &-right{
+      display:flex;
+      justify-content:flex-start;
+      gap: 10px;
+      width: 200px;
+    }
+
+    &-left{
+      display:flex;
+      justify-content:flex-end;
+      gap: 16px;
+      width: 200px;
+    }
+  }
+}
