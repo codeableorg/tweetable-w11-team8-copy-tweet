@@ -1,6 +1,7 @@
 class Tweet < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
+  has_many :liked_tweets, through: :likes, source: :tweet
   has_many :replies, class_name: 'Tweet',
                      foreign_key: 'replied_to_id',
                      dependent: :destroy,
