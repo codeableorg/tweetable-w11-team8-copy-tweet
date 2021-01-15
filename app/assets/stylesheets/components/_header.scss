@@ -1,0 +1,11 @@
+@import './global';
+@import './button';
+
+.header{
+  @include center-content;
+  padding: 16px;
+  width: 600px;
+  height: 64px;
+  background-color: $primary-alternative-color;
+  border: 1px solid $background1-color;
+}

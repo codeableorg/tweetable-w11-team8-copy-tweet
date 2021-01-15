@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.select { |tweet| tweet.replied_to_id == nil }.reverse
   end
 
   def show
@@ -34,18 +34,22 @@ class TweetsController < ApplicationController
   def update
     @tweet = Tweet.find(params[:id])
     @tweet.user = current_user
-    if @tweet.update(tweet_params)
-      redirect_to tweets_path
+    @tweet.update(tweet_params)
+    if @tweet[:replied_to_id]
+      redirect_to tweet_path(@tweet.replied_to)
     else
-      render 'edit'
+      redirect_to tweets_path
     end
   end
 
   def destroy
     @tweet = Tweet.find(params[:id])
     @tweet.destroy
-
-    redirect_to tweets_path
+    if @tweet[:replied_to_id]
+      redirect_to tweet_path(@tweet.replied_to)
+    else
+      redirect_to tweets_path
+    end
   end
 
   private
