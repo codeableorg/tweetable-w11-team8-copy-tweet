@@ -3,13 +3,17 @@ class LikesController < ApplicationController
   before_action :find_like, only: [:destroy]
 
   def create
-    if already_liked
-      flash[:notice] = "You can't like more than once"
+    if current_user == nil
+      redirect_to new_user_session_path
     else
-      @tweet.likes.create(user_id: current_user.id)
-    end
-  
-    redirect_to tweets_path
+      if already_liked
+        flash[:notice] = "You can't like more than once"
+      else
+        @tweet.likes.create(user_id: current_user.id)
+      end
+
+      redirect_to tweets_path
+    end   
   end
 
   def destroy
