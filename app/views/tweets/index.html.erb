@@ -27,18 +27,17 @@
               <span><%= tweet.replies.size %></span>
         <% end %>
               <% if current_user %>
-                <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %>
-                 
+                <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %> 
+              <% end %>
+              <% if pre_like %>
+                <%= button_to tweet_like_path(tweet, pre_like), method: :delete do %>
+                  <%= image_tag 'like.svg' %>
                 <% end %>
-                <% if pre_like %>
-                  <%= button_to tweet_like_path(tweet, pre_like), method: :delete do %>
-                    <%= image_tag 'like.svg' %>
-                  <% end %>
-                <% else %>
-                  <%= button_to tweet_likes_path(tweet), method: :post do %>
-                    <%= image_tag 'like.svg' %>
-                  <% end %>
+              <% else %>
+                <%= button_to tweet_likes_path(tweet), method: :post do %>
+                  <%= image_tag 'like.svg' %>
                 <% end %>
+              <% end %>
              
               <p><%= tweet.likes.count %> </p>
             </div>

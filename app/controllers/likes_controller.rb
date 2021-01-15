@@ -12,7 +12,11 @@ class LikesController < ApplicationController
         @tweet.likes.create(user_id: current_user.id)
       end
 
-      redirect_to tweets_path
+      if @tweet[:replied_to_id]
+        redirect_to tweet_path(@tweet.replied_to)
+      else
+        redirect_to tweets_path
+      end
     end   
   end
 
@@ -23,7 +27,11 @@ class LikesController < ApplicationController
       @like.destroy
     end
 
-    redirect_to tweets_path
+    if @tweet[:replied_to_id]
+      redirect_to tweet_path(@tweet.replied_to)
+    else
+      redirect_to tweets_path
+    end
   end
 
   private
