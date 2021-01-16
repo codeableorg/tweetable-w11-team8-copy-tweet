@@ -11,19 +11,36 @@
     <div class="home">
       <aside class="home-aside">
 
-      <%= link_to tweets_path do %>
-        <h3 class="tweetable typo__large">
-          { <span class="tweetable__text">Tweet</span>able }
-        <h3>
-      <% end %>
-        <div class="current_session">
+        <%= link_to tweets_path do %>
+          <h3 class="tweetable typo__large">
+            { <span class="tweetable__text">Tweet</span>able }
+          </h3>
+        <% end %>
+
+        <div class="tweet__icon">
+          <%= image_tag 'tweet.png' %>
+          <h3><%= link_to 'Home', tweets_path, class:'typo__large typo__bold' %></h3>
+        </div>
+
+        <div class="weet__icon">
           <% if current_user %>
-            <%=link_to current_user.username, edit_user_registration_path%>
-            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'button button-category button-session' %>
-          <% else %>
-            <%= link_to "Signin", new_user_session_path, class: 'button button-category button-session' %>
+            <%= image_tag 'profile.png' %>
+            <%= link_to 'Profile', tweets_path %>
           <% end %>
         </div>
+
+        <div class="current_session">
+          <div class="limit__button">
+          <% if current_user %>
+            <%=link_to current_user.username, edit_user_registration_path%>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'button__secundary button__small typo__medium' %>
+          <% else %>
+            <%= link_to "Login", new_user_session_path, class: 'button__secundary button__small typo__medium' %>
+          <% end %>
+          </div>
+        </div>
+        <div class="typo__small">Continue with Google</div>
+        <div class="typo__small">Continue with Github</div>
       </aside>
       <div>
         <%= yield %>
