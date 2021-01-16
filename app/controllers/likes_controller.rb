@@ -17,7 +17,7 @@ class LikesController < ApplicationController
       else
         redirect_to tweets_path
       end
-    end   
+    end
   end
 
   def destroy
