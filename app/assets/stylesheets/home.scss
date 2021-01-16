@@ -15,6 +15,18 @@
   background-color: $primary-alternative-color;
   height: 100%;
   border: 1px solid $background1-color;
+  display: block;
+  div {
+    margin-bottom: 8px;
+  }
+  /* display: grid;
+  grid-auto-flow: auto;
+  grid-template-rows: repeat(6, max(38px)) ;
+  align-items: center;*/
+  padding: 4px 16px;
+  a {
+    text-decoration: none;
+  }
   .tweetable{
     color: $secundary-text-color;
     &__text{
@@ -23,8 +35,22 @@
   }
 }
 
-
-
+.tweet__icon{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  img {
+    width: 20px;
+    height: 16px;
+  }
+  a {
+    color: black;
+  }
+}
+.limit__button{
+  display: flex;
+}
 .home {
   display:grid;
   grid-template-columns: repeat(2,auto);
