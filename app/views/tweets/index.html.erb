@@ -3,7 +3,7 @@
       <h2 class="typo__bold typo__large">Home</h2>
   </header>
 </div>
-<div class="home-content">
+<div class="content">
   <% if current_user %>
     <%= render 'form' %>
   <% end %>
@@ -25,9 +25,23 @@
             <div class="tweet__icons-right">
               <%= image_tag 'retweet.svg' %>
               <span><%= tweet.replies.size %></span>
-              <%= image_tag 'like.svg' %>
-            </div>
         <% end %>
+              <% if current_user %>
+                <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %> 
+              <% end %>
+              <% if pre_like %>
+                <%= button_to tweet_like_path(tweet, pre_like), method: :delete do %>
+                  <%= image_tag 'like.svg' %>
+                <% end %>
+              <% else %>
+                <%= button_to tweet_likes_path(tweet), method: :post do %>
+                  <%= image_tag 'like.svg' %>
+                <% end %>
+              <% end %>
+             
+              <p><%= tweet.likes.count %> </p>
+            </div>
+        
           <% if current_user %>
             <div class="tweet__icons-left">
               <%= link_to edit_tweet_path(tweet) do%>
