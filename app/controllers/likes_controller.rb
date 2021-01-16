@@ -1,6 +1,6 @@
 class LikesController < ApplicationController
   before_action :find_tweet
-  before_action :find_like, only: [:destroy]
+  before_action :find_like, only: i%[destroy]
 
   def create
     if current_user == nil

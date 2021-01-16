@@ -5,6 +5,13 @@ Rails.application.routes.draw do
   resources :tweets do
     resources :likes
   end
-  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: 'callbacks' }
 
+  namespace 'api' do
+    post '/login' => 'sessions#create'
+    delete '/logout' => 'session#destroy'
+    resources :tweets do
+      resources :likes
+    end
+  end
 end
