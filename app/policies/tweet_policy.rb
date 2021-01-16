@@ -6,11 +6,11 @@ class TweetPolicy < ApplicationPolicy
   end
 
   def update?
-    is_owner
+    owner?
   end
 
   def destroy?
-    is_owner
+    owner?
   end
 
   def create?
@@ -19,8 +19,7 @@ class TweetPolicy < ApplicationPolicy
 
   private
 
-  def is_owner
+  def owner?
     @user == @record.user
   end
-
 end
