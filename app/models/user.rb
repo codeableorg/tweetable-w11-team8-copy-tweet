@@ -13,4 +13,5 @@ class User < ApplicationRecord
   # email and password was create when we  was creating devise User
   validates :name, presence: true
   validates :username, presence: true, uniqueness: true
+
 end
