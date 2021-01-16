@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     post '/login' => 'sessions#create'
-    delete '/logout' => 'session#destroy'
+    delete '/logout' => 'sessions#destroy'
     resources :tweets do
       resources :likes
     end

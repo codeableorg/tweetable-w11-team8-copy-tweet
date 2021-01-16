@@ -15,6 +15,10 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   has_secure_token
 
+  def invalidate_token
+    update(token: nil)
+  end 
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
