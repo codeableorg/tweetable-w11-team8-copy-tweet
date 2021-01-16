@@ -16,38 +16,37 @@ class TweetsController < ApplicationController
 
   def edit
     @tweet = Tweet.find(params[:id])
+    authorize @tweet
   end
 
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
-    @tweet.save
-    if tweet_params[:replied_to_id]
-      redirect_to tweet_path(@tweet.replied_to)
+    authorize @tweet
+    if @tweet.save
+      redirect_to request.referer
     else
-      redirect_to tweets_path
+      flash[:notice] = 'Tweet could not be save'
     end
+    
   end
 
   def update
     @tweet = Tweet.find(params[:id])
     @tweet.user = current_user
-    @tweet.update(tweet_params)
-    if @tweet[:replied_to_id]
-      redirect_to tweet_path(@tweet.replied_to)
+    if @tweet.update(tweet_params)
+      redirect_to request.referer
     else
-      redirect_to tweets_path
+      flash[:notice] = 'Tweet could not be save'
     end
   end
 
   def destroy
     @tweet = Tweet.find(params[:id])
     @tweet.destroy
-    if @tweet[:replied_to_id]
-      redirect_to tweet_path(@tweet.replied_to)
-    else
-      redirect_to tweets_path
-    end
+    authorize @tweet
+
+    redirect_to request.referer
   end
 
   private
