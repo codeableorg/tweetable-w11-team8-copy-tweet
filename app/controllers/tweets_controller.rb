@@ -1,13 +1,12 @@
 class TweetsController < ApplicationController
   def index
-    @tweets = Tweet.select { |tweet| tweet.replied_to_id == nil }.reverse
+    @tweets = Tweet.select { |tweet| tweet.replied_to_id.nil? }.reverse
   end
 
   def show
     @tweet = Tweet.find(params[:id])
     @reply = Tweet.new
     @reply.replied_to = @tweet
-    
   end
 
   def new
@@ -28,7 +27,6 @@ class TweetsController < ApplicationController
     else
       redirect_to tweets_path
     end
-    
   end
 
   def update

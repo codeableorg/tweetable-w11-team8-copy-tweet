@@ -31,16 +31,17 @@
 
         <div class="current_session">
           <div class="limit__button">
-          <% if current_user %>
-            <%=link_to current_user.username, edit_user_registration_path%>
-            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'button__secundary button__small typo__medium' %>
-          <% else %>
-            <%= link_to "Login", new_user_session_path, class: 'button__secundary button__small typo__medium' %>
-          <% end %>
+            <% if current_user %>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'button__secundary button__small typo__medium' %>
+            <% else %>
+              <%= link_to "Login", new_user_session_path, class: 'button__secundary button__small typo__medium' %>
+            <% end %>
           </div>
         </div>
-        <div class="typo__small">Continue with Google</div>
-        <div class="typo__small">Continue with Github</div>
+        <% if !current_user %>
+          <div class="typo__small">Continue with Google</div>
+          <div class="typo__small">Continue with Github</div>
+        <% end %>
       </aside>
       <div>
         <%= yield %>

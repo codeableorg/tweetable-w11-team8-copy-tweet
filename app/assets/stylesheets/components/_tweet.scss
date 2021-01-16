@@ -14,6 +14,10 @@
     display:grid;
     grid-template-rows: 24px auto 24px;
     gap: 8px;
+    a {
+      text-decoration: none;
+      color: black;
+    }
   }
 
   &__head{
@@ -27,20 +31,41 @@
     width: 510px;
     display:flex;
     justify-content:space-between;
+    align-items: center;
+
     &-right{
       display:flex;
       justify-content:flex-start;
+      align-items: center;
       gap: 10px;
       width: 200px;
+      form {
+        height: 18px;
+      }
+
+      a {
+        display:flex;
+        justify-content:flex-start;
+        align-items: center;
+        gap: 10px;
+      }
     }
 
     &-left{
       display:flex;
       justify-content:flex-end;
+      align-items: center;
       gap: 16px;
       width: 200px;
     }
   }
+  /* aditionals css */
+  &__likes{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    
+    }
 }
 
 .edit__container{
