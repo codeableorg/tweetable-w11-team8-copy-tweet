@@ -264,12 +264,13 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
   devise
   jbuilder (~> 2.7)
   listen (~> 3.2)
-  omniauth-github
+  omniauth-github (~> 1.4.0)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
   pundit

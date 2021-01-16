@@ -13,6 +13,7 @@ class User < ApplicationRecord
   # email and password was create when we  was creating devise User
   validates :name, presence: true
   validates :username, presence: true, uniqueness: true
+  has_secure_token
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
