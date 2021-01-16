@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   namespace 'api' do
     post '/login' => 'sessions#create'
     delete '/logout' => 'sessions#destroy'
-    resources :tweets do
+    resources :tweets, only: %i[index show create update destroy] do
       resources :likes
     end
   end
