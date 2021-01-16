@@ -19,6 +19,11 @@
       </div>
     <% end %>
 
-    <%= link_to 'Sign Up',new_user_registration_path %>
+    <%# <%= link_to 'Sign Up',new_user_registration_path %>
+    <%# <div> %>
+      <%# <%= link_to "Sign in with GitHub", user_github_omniauth_authorize_path %>
+    <%# </div> %>
+    <%= render "devise/shared/links" %>
+
   </div>
 </div>
