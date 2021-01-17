@@ -6,9 +6,9 @@
 <div class="tweet__container">
       <div>
         <% if @tweet.user.avatar.attached? %>
-          <%= image_tag(@tweet.user.avatar, class:'image__circle') %>
+          <%= image_tag(@tweet.user.avatar, class:'image__circle image__small') %>
         <% else %>
-          <%= image_tag('default.png', class:'image__circle') %>
+          <%= image_tag('default.png', class:'image__circle image__small') %>
         <% end %>
       </div>
 
@@ -22,6 +22,7 @@
           <p><%= @tweet.body %></p>
         <% end %>
           <div class="tweet__icons">
+          
             <div class="tweet__icons-right">
               <%= image_tag 'retweet.svg' %>
               <span><%= @tweet.replies.size %></span>
@@ -41,7 +42,6 @@
               </div>
               <span><%= @tweet.likes.size %></span>
             </div>
-        
           <% if policy(@tweet).update? %>
             <div class="tweet__icons-left">
               <%= link_to edit_tweet_path(@tweet) do%>
@@ -63,12 +63,12 @@
     <%= form_with model: [@reply] do |form| %>
       <div class="tweet__container">
         <div class="tweet__image">
-          <%= image_tag 'default.png', class:'image__circle image__small' %>
+          <%= image_tag(current_user.avatar, class:'image__circle image__small') %>
         </div>
         <div class="form__tweet">
           <%= form.hidden_field :replied_to_id, value: @reply.replied_to_id%>
           <%= form.text_area :body, class: "tweet_area", placeholder: "Tweet your reply" %>
-          <%= form.submit value: "Tweet", class: "button__primary button__medium typo_medium" %>
+          <%= form.submit "Tweet", class: "button__primary button__medium typo_medium" %>
         </div>
       </div>
     <% end %>
@@ -80,9 +80,9 @@
       <div class="tweet__container">
       <div>
         <% if @tweet.user.avatar.attached? %>
-          <%= image_tag(reply.user.avatar, class:'image__circle') %>
+          <%= image_tag(reply.user.avatar, class:'image__circle image__small') %>
         <% else %>
-          <%= image_tag('default.png', class:'image__circle') %>
+          <%= image_tag('default.png', class:'image__circle image__small') %>
         <% end %>
       </div>
         <div class="tweet__content">
@@ -91,11 +91,16 @@
             <div class="typo__medium typo__regular color-alter">@<%= reply.user.username %></div>
             <div class="typo__small typo__regular color-alter"><%= reply.user.created_at %></div>
           </div>
+          <%= link_to tweet_path(reply) do %>
           <p><%= reply.body %></p>
+          <% end %>
           <div class="tweet__icons">
+          
             <div class="tweet__icons-right">
+            <%= link_to tweet_path(reply) do %>
               <%= image_tag 'retweet.svg' %>
               <span><%= reply.replies.size %></span>
+              <% end %>
               <div>
               <% if current_user %>
                 <% pre_like = reply.likes.find { |like| like.user_id == current_user.id} %>
@@ -120,7 +125,6 @@
                 <span><%= link_to tweet_path(reply), method: :delete, data: { confirm: "Are you sure you want to delete this tweet?" } do %> <%= image_tag 'delete.png'%><% end %> </span>
               <% end %>
             </div>
-          
           </div>
         </div>
       </div>
