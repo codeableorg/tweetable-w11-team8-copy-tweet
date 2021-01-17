@@ -4,15 +4,16 @@
   </header>
 </div>
 <div class="content">
+
   <% if current_user %>
     <%= render 'form' %>
   <% end %>
-  
+
     <% @tweets.each do |tweet| %>
       <div class="tweet__container">
         <div>
           <% if tweet.user.avatar.attached? %>
-            <%= image_tag(tweet.user.avatar, class:'image__circle') %>
+            <%= image_tag(tweet.user.avatar, class:'image__circle image__small') %>
           <% else %>
             <%= image_tag('default.png', class:'image__circle') %>
           <% end %>
