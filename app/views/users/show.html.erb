@@ -3,11 +3,136 @@
       <h2 class="typo__bold typo__large">Profile</h2>
   </header>
   <div class="profile">
-    <%= image_tag 'default.png' %>
-    <h6><%= current_user.name %></h6>
-    <p>@<%= current_user.username %></p>
-    <div><%= current_user.created_at %></div>
-    <%= link_to 'Edit Profile' %>
-  <div>
-  #AQUI VA TUS ITERACIONES ANDREA
+    <div>
+      <% if current_user.avatar.attached? %>
+        <%= image_tag(current_user.avatar, class:'image__circle image__medium') %>
+      <% else %>
+        <%= image_tag('default.png', class:'image__circle') %>
+      <% end %>
+    </div>
+    <h6 class="typo__large typo__regular"><%= current_user.name %></h6>
+    <p class="typo__medium typo__regular color-alter">@<%= current_user.username %></p>
+    <div class="typo__medium typo__regular color-alter calendar">
+      <%= image_tag 'calendar.png' %> <%= current_user.created_at %>
+    </div>
+    <%= link_to 'Edit Profile', edit_user_registration_path, class:'button__secundary button__medium link' %>
+  </div>
+  <div class="tweets__likes">
+    <div class="hidden"><input type="radio" id="tweet" name="profile" value="tweet"></div>
+    <label for="tweet"><%= image_tag 'retweet.svg' %>tweets</label>
+    <div class="hidden"><input type="radio" id="like" name="profile" value="like"></div>
+    <label for="like"><%= image_tag 'like.svg' %><span>likes</span></label>
+  </div>
+  <div class="show__my-tweets">
+  <% current_user.tweets do |tweet| %>
+    <div class="tweet__container">
+      <div>
+        <% if tweet.user.avatar.attached? %>
+          <%= image_tag(tweet.user.avatar, class:'image__circle') %>
+        <% else %>
+          <%= image_tag('default.png', class:'image__circle') %>
+        <% end %>
+      </div>
+      <div class="tweet__content">
+        <div class="tweet__head">
+          <div class="typo__medium typo__bold color-main"><%= tweet.user.name %></div>
+          <div class="typo__medium typo__regular color-alter">@<%= tweet.user.username %></div>
+          <div class="typo__small typo__regular color-alter"><%= tweet.user.created_at %></div>
+        </div>
+        <%= link_to tweet_path(tweet) do %>
+          <p class="typo__medium typo__regular"><%= tweet.body %></p>
+        <% end %>
+        <div class="tweet__icons">
+          <div class="tweet__icons-right">
+            <%= link_to tweet_path(tweet) do %>
+              <%= image_tag 'retweet.svg' %>
+              <span><%= tweet.replies.size %></span>
+            <% end %>
+            <div>
+              <% if current_user %>
+                <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %>
+              <% end %>
+              <% if pre_like %>
+                <%= button_to tweet_like_path(tweet, pre_like), method: :delete, class:'tweet__likes' do %>
+                  <%= image_tag 'like.svg' %>
+                <% end %>
+              <% else %>
+                <%= button_to tweet_likes_path(tweet), method: :post, class:'tweet__likes' do %>
+                  <%= image_tag 'like.svg' %>
+                <% end %>
+              <% end %>
+            </div>
+            <p><%= tweet.likes.count %> </p>
+          </div>
+          <div class="tweet__icons-left">
+            <% if current_user %>
+              <%= link_to edit_tweet_path(tweet) do%>
+                <%= image_tag 'edit.svg' %>
+              <% end %>
+              <%= link_to tweet_path(tweet), method: :delete, data: { confirm: "Are you sure you want to delete this tweet?" } do %>
+                <%= image_tag 'delete.svg' %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <div class="show__my-likes">
+    <% current_user.likes do |tweet| %>
+      <div class="tweet__container">
+        <div>
+          <% if tweet.user.avatar.attached? %>
+            <%= image_tag(tweet.user.avatar, class:'image__circle') %>
+          <% else %>
+            <%= image_tag('default.png', class:'image__circle') %>
+          <% end %>
+        </div>
+        <div class="tweet__content">
+          <div class="tweet__head">
+            <div class="typo__medium typo__bold color-main"><%= tweet.user.name %></div>
+            <div class="typo__medium typo__regular color-alter">@<%= tweet.user.username %></div>
+            <div class="typo__small typo__regular color-alter"><%= tweet.user.created_at %></div>
+          </div>
+          <%= link_to tweet_path(tweet) do %>
+            <p class="typo__medium typo__regular"><%= tweet.body %></p>
+          <% end %>
+          <div class="tweet__icons">
+            <div class="tweet__icons-right">
+              <%= link_to tweet_path(tweet) do %>
+                <%= image_tag 'retweet.svg' %>
+                <span><%= tweet.replies.size %></span>
+              <% end %>
+              <div>
+                <% if current_user %>
+                  <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %>
+                <% end %>
+                <% if pre_like %>
+                  <%= button_to tweet_like_path(tweet, pre_like), method: :delete, class:'tweet__likes' do %>
+                    <%= image_tag 'like.svg' %>
+                  <% end %>
+                <% else %>
+                  <%= button_to tweet_likes_path(tweet), method: :post, class:'tweet__likes' do %>
+                    <%= image_tag 'like.svg' %>
+                  <% end %>
+                <% end %>
+              </div>
+              <p><%= tweet.likes.count %> </p>
+            </div>
+            <div class="tweet__icons-left">
+              <% if current_user %>
+                <%= link_to edit_tweet_path(tweet) do%>
+                  <%= image_tag 'edit.svg' %>
+                <% end %>
+                <%= link_to tweet_path(tweet), method: :delete, data: { confirm: "Are you sure you want to delete this tweet?" } do %>
+                  <%= image_tag 'delete.svg' %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

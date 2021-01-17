@@ -1,3 +1,41 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import './components/global';
+.profile {
+  background-color:$primary-alternative-color;
+  width: 600px;
+  padding: 16px 0;
+  border: 1px solid $background1-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  .calendar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .link {
+    text-decoration: none;
+    color: $primary-color;
+  }
+}
+
+.tweets__likes {
+  background-color:$primary-alternative-color;
+  border: 1px solid $background1-color;
+  display: flex;
+  width: 600px;
+  justify-content: space-around;
+  align-items: center;
+  height: 40px;
+  gap: 8px;
+  .hidden {
+    display:none;
+  }
+}
