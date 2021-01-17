@@ -4,6 +4,7 @@
   </header>
 </div>
 <div class="tweet__container">
+    <%= link_to user_path(@tweet.user_id) do %>
       <div>
         <% if @tweet.user.avatar.attached? %>
           <%= image_tag(@tweet.user.avatar, class:'image__circle') %>
@@ -11,11 +12,15 @@
           <%= image_tag('default.png', class:'image__circle') %>
         <% end %>
       </div>
-
+    <% end %>
       <div class="tweet__content">
         <div class="tweet__head">
+        <%= link_to user_path(@tweet.user_id) do %>
           <div class="typo__medium typo__bold color-main"><%= @tweet.user.name %></div>
+        <% end %>
+        <%= link_to user_path(@tweet.user_id) do %>
           <div class="typo__medium typo__regular color-alter">@<%= @tweet.user.username %></div>
+        <% end %>
           <div class="typo__small typo__regular color-alter"><%= @tweet.user.created_at %></div>
         </div>
         <%= link_to tweet_path(@tweet) do %>
@@ -78,17 +83,23 @@
     <% @tweet.replies.reverse.each do |reply| %>
 
       <div class="tweet__container">
-      <div>
-        <% if @tweet.user.avatar.attached? %>
-          <%= image_tag(reply.user.avatar, class:'image__circle') %>
-        <% else %>
-          <%= image_tag('default.png', class:'image__circle') %>
-        <% end %>
-      </div>
+      <%= link_to user_path(reply.user_id) do %>
+        <div>
+          <% if @tweet.user.avatar.attached? %>
+            <%= image_tag(reply.user.avatar, class:'image__circle') %>
+          <% else %>
+            <%= image_tag('default.png', class:'image__circle') %>
+          <% end %>
+        </div>
+      <% end %>
         <div class="tweet__content">
           <div class="tweet__head">
-            <div class="typo__medium typo__bold color-main"><%= reply.user.name %></div>
-            <div class="typo__medium typo__regular color-alter">@<%= reply.user.username %></div>
+            <%= link_to user_path(reply.user_id) do %>
+              <div class="typo__medium typo__bold color-main"><%= reply.user.name %></div>
+            <% end %>
+            <%= link_to user_path(reply.user_id) do %>
+              <div class="typo__medium typo__regular color-alter">@<%= reply.user.username %></div>
+            <% end %>
             <div class="typo__small typo__regular color-alter"><%= reply.user.created_at %></div>
           </div>
           <p><%= reply.body %></p>

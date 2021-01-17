@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # get 'users/show'
-  #root 'home#index'
+  # root 'home#index'
   root 'tweets#index'
   resources :tweets do
     resources :likes
