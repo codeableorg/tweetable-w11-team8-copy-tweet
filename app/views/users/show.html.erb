@@ -15,7 +15,7 @@
     <div class="typo__medium typo__regular color-alter calendar">
       <%= image_tag 'calendar.png' %> <%= @user.created_at %>
     </div>
-    <%= link_to 'Edit Profile', edit_user_registration_path, class:'button__secundary button__medium link' %>
+    <%= link_to 'Edit Profile', user_registration_path, method: :patch, class:'button__secundary button__medium link' %>
   </div>
   <div class="tweets__likes">
     <div class="hidden"><input type="radio" id="tweet" name="profile" value="tweet"></div>
