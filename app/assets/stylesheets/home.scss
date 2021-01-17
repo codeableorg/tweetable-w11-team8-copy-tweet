@@ -9,7 +9,9 @@
 @import './components/tweet';
 @import './components/new_tweet';
 
-
+.home {
+  margin-top: 10vh;
+}
 .home-aside{
   width: 180px;
   background-color: $primary-alternative-color;
