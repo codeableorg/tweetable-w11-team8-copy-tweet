@@ -1,6 +1,12 @@
 class ApiController < ActionController::API
+  include Pundit
   include ActionController::HttpAuthentication::Token::ControllerMethods
+  
   before_action :authorized_token
+
+  rescue_from Pundit::NoAuthorizedError do |e|
+    unauthorized_response(e.message)
+  end
 
   def current_user
     @current_user ||= authenticate_token
