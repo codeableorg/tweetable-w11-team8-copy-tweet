@@ -1,6 +1,6 @@
 class LikesController < ApplicationController
   before_action :find_tweet
-  before_action :find_like, only: [:destroy]
+  before_action :find_like, only: %i[destroy]
 
   def create
     if current_user == nil
@@ -11,12 +11,6 @@ class LikesController < ApplicationController
       else
         @tweet.likes.create(user_id: current_user.id)
       end
-
-      # if @tweet[:replied_to_id]
-      #   redirect_to tweet_path(@tweet.replied_to)
-      # else
-      #   redirect_to tweets_path
-      # end
 
       redirect_to request.referer
     end
@@ -30,12 +24,6 @@ class LikesController < ApplicationController
     end
 
     redirect_to request.referer
-
-    # if @tweet[:replied_to_id]
-    #   redirect_to tweet_path(@tweet.replied_to)
-    # else
-    #   redirect_to tweets_path
-    # end
   end
 
   private
