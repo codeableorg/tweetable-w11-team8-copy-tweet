@@ -4,16 +4,16 @@
   </header>
   <div class="profile">
     <div>
-      <% if current_user.avatar.attached? %>
-        <%= image_tag(current_user.avatar, class:'image__circle image__medium') %>
+      <% if @user.avatar.attached? %>
+        <%= image_tag(@user.avatar, class:'image__circle image__medium') %>
       <% else %>
-        <%= image_tag('default.png', class:'image__circle') %>
+        <%= image_tag('default.png', class:'image__circle image__medium') %>
       <% end %>
     </div>
-    <h6 class="typo__large typo__regular"><%= current_user.name %></h6>
-    <p class="typo__medium typo__regular color-alter">@<%= current_user.username %></p>
+    <h6 class="typo__large typo__regular"><%= @user.name %></h6>
+    <p class="typo__medium typo__regular color-alter">@<%= @user.username %></p>
     <div class="typo__medium typo__regular color-alter calendar">
-      <%= image_tag 'calendar.png' %> <%= current_user.created_at %>
+      <%= image_tag 'calendar.png' %> <%= @user.created_at %>
     </div>
     <%= link_to 'Edit Profile', edit_user_registration_path, class:'button__secundary button__medium link' %>
   </div>
@@ -24,13 +24,13 @@
     <label for="like"><%= image_tag 'like.svg' %><span>likes</span></label>
   </div>
   <div class="show__my-tweets">
-  <% current_user.tweets do |tweet| %>
+  <% @user.tweets.each do |tweet| %>
     <div class="tweet__container">
       <div>
         <% if tweet.user.avatar.attached? %>
-          <%= image_tag(tweet.user.avatar, class:'image__circle') %>
+          <%= image_tag(tweet.user.avatar, class:'image__circle image__small') %>
         <% else %>
-          <%= image_tag('default.png', class:'image__circle') %>
+          <%= image_tag('default.png', class:'image__circle image__small') %>
         <% end %>
       </div>
       <div class="tweet__content">
@@ -65,10 +65,12 @@
             <p><%= tweet.likes.count %> </p>
           </div>
           <div class="tweet__icons-left">
-            <% if current_user %>
+            <% if policy(tweet).update? %>
               <%= link_to edit_tweet_path(tweet) do%>
                 <%= image_tag 'edit.svg' %>
               <% end %>
+            <% end %>
+            <% if policy(tweet).update? %>
               <%= link_to tweet_path(tweet), method: :delete, data: { confirm: "Are you sure you want to delete this tweet?" } do %>
                 <%= image_tag 'delete.svg' %>
               <% end %>

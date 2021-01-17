@@ -25,7 +25,7 @@
         <div class="weet__icon">
           <% if current_user %>
             <%= image_tag 'profile.png' %>
-            <%= link_to 'Profile', tweets_path %>
+            <%= link_to 'Profile', user_path(current_user) %>
           <% end %>
         </div>
 
