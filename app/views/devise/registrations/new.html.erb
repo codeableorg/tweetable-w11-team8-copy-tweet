@@ -1,0 +1,55 @@
+<div class="home-header">
+  <header class="header">
+      <h2 class="typo__bold typo__large">Sign up</h2>
+  </header>
+  </div>
+  <div class="form__container">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      <%= f.label :email, class:"typo__small" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :name, class:"typo__small" %><br />
+      <%= f.text_field :name, autocomplete: "name" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :username, class:"typo__small" %><br />
+      <%= f.text_field :username, autocomplete: "name" %>
+    </div>
+
+    <div class="field form__avatar">
+      <%= f.label :avatar, class:"typo__small" %> (optional)<br />
+      <%= f.file_field :avatar, class: "padding__field" %>
+    </div>
+
+    <%# <div>
+      <%= if current_user.avatar.attached? %>
+        <%# <%= image_tag(url_for(current_user.avatar)) %>
+      <%# <% else %>
+        <%# <%= image_tag 'default.png' %>
+      <%# <% end %>
+    <%# </div>   %>
+
+    <div class="field">
+      <%= f.label :password, class:"typo__small" %><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation, class:"typo__small" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Sign up", {class:'button__primary button__medium typo__medium'} %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+  </div>
+</div>

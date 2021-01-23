@@ -1,0 +1,29 @@
+<div class="home-header">
+  <header class="header">
+      <h2 class="typo__bold typo__large">Log in</h2>
+  </header>
+  <div class="form__container">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Submit", {class:'button__primary button__medium typo__medium'} %>
+      </div>
+    <% end %>
+
+    <%# <%= link_to 'Sign Up',new_user_registration_path %>
+    <%# <div> %>
+      <%# <%= link_to "Sign in with GitHub", user_github_omniauth_authorize_path %>
+    <%# </div> %>
+    <%= render "devise/shared/links" %>
+
+  </div>
+</div>

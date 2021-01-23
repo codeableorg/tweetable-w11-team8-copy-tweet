@@ -1,0 +1,38 @@
+// Place all the styles related to the Tweets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+@import './components/global';
+@import './components/typography';
+@import './components/button';
+@import './components/header';
+@import './components/image';
+@import './components/tweet';
+@import './components/new_tweet';
+@import './components/log_in';
+
+.tweet_area{
+  border:none;
+  min-width: 510px;
+  height: 60px;
+  padding: 8px;
+  margin-bottom: 8px;
+  &:focus{
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 6px $primary-color;
+  }
+}
+
+
+.form__tweet {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap
+}
+
+.color-main{
+  color: $primary-text-color;
+}
+.color-alter{
+  color: $secundary-text-color;
+}

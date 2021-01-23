@@ -1,0 +1,32 @@
+<div class="home-header">
+  <header class="header">
+      <h2 class="typo__bold typo__large">Edit tweet</h2>
+  </header>
+</div>
+
+<div class='home-content'>
+  <%= form_with model: [@user, @tweet], local: true do |form| %>
+    <% if @tweet.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          Something went wrong:
+        </h2>
+        <ul>
+          <% @tweet.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+      <div class="edit__container">
+        <div class="edit__container--area">
+          <%= form.label :body, placeholder: "What's happening?", :class => 'typo__small typo__regular' %>
+          <%= form.text_area :body, class: "edit_area"%>
+        </div>
+          <div class="two__buttons">
+          <%= link_to "Cancel", :back %>
+          <%= form.submit "Tweet", class: "button__primary button__medium typo_medium" %>
+        </div>
+      </div>
+  <% end %>
+</div>

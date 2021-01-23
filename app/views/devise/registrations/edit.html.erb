@@ -1,0 +1,49 @@
+<div class="home-header">
+  <header class="header">
+      <h2 class="typo__bold typo__large">Edit User</h2>
+  </header>
+  <div class="form__container">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      <%= f.label :email, class:"typo__small" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :name, class:"typo__small" %><br />
+      <%= f.text_field :name, autocomplete: "name" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :username, class:"typo__small" %><br />
+      <%= f.text_field :username, autocomplete: "name" %>
+    </div>
+
+    <div class="field typo__small">
+      <%= f.label :avatar, class:"typo__small" %> (optional)<br />
+      <%= f.file_field :avatar, class:"padding__field" %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div class="field typo__small">
+      <%= f.label :password, class:"typo__small" %> <i>(leave blank if you don't want</br>to change it)</i><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
+
+    <div class="field typo__small">
+      <%= f.label :current_password, class:"typo__small" %> <i>(we need your current</br>password to confirm your changes)</i><br />
+      <%= f.password_field :current_password, autocomplete: "current-password" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Submit", class:"button__primary button__medium" %>
+    </div>
+  <% end %>
+
+  <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "cancel__account" %>
+</div>

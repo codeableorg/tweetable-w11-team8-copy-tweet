@@ -1,0 +1,143 @@
+<div class="home-header">
+  <header class="header">
+      <h2 class="typo__bold typo__large">Tweet detail</h2>
+  </header>
+</div>
+<div class="tweet__container">
+    <%= link_to user_path(@tweet.user_id) do %>
+      <div>
+        <% if @tweet.user.avatar.attached? %>
+          <%= image_tag(@tweet.user.avatar, class:'image__circle image__small') %>
+        <% else %>
+          <%= image_tag('default.png', class:'image__circle image__small') %>
+        <% end %>
+      </div>
+    <% end %>
+      <div class="tweet__content">
+        <div class="tweet__head">
+        <%= link_to user_path(@tweet.user_id) do %>
+          <div class="typo__medium typo__bold color-main"><%= @tweet.user.name %></div>
+        <% end %>
+        <%= link_to user_path(@tweet.user_id) do %>
+          <div class="typo__medium typo__regular color-alter">@<%= @tweet.user.username %></div>
+        <% end %>
+          <div class="typo__small typo__regular color-alter"><%= @tweet.user.created_at %></div>
+        </div>
+        <%= link_to tweet_path(@tweet) do %>
+          <p><%= @tweet.body %></p>
+        <% end %>
+          <div class="tweet__icons">
+          
+            <div class="tweet__icons-right">
+              <%= image_tag 'retweet.svg' %>
+              <span><%= @tweet.replies.size %></span>
+              <div>
+                <% if current_user %>
+                  <% pre_like = @tweet.likes.find { |like| like.user_id == current_user.id} %>
+                <% end %>
+                <% if pre_like %>
+                  <%= button_to tweet_like_path(@tweet, pre_like), method: :delete, class:'tweet__likes' do %>
+                    <%= image_tag 'like.svg' %>
+                  <% end %>
+                <% else %>
+                  <%= button_to tweet_likes_path(@tweet), method: :post, class:'tweet__likes' do %>
+                    <%= image_tag 'like.svg' %>
+                  <% end %>
+                <% end %>
+              </div>
+              <span><%= @tweet.likes.size %></span>
+            </div>
+          <% if policy(@tweet).update? %>
+            <div class="tweet__icons-left">
+              <%= link_to edit_tweet_path(@tweet) do%>
+                <%= image_tag 'edit.svg' %>
+              <% end %>
+          <% end %>
+          <% if policy(@tweet).destroy? %>
+              <%= link_to tweet_path(@tweet), method: :delete, data: { confirm: "Are you sure you want to delete this tweet?" } do %>
+                <%= image_tag 'delete.svg' %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% if current_user %>
+
+
+    <%= form_with model: [@reply] do |form| %>
+      <div class="tweet__container">
+        <div class="tweet__image">
+          <%= image_tag(current_user.avatar, class:'image__circle image__small') %>
+        </div>
+        <div class="form__tweet">
+          <%= form.hidden_field :replied_to_id, value: @reply.replied_to_id%>
+          <%= form.text_area :body, class: "tweet_area", placeholder: "Tweet your reply" %>
+          <%= form.submit "Tweet", class: "button__primary button__medium typo_medium" %>
+        </div>
+      </div>
+    <% end %>
+
+
+  <% end %>
+    <% @tweet.replies.reverse.each do |reply| %>
+
+      <div class="tweet__container">
+      <%= link_to user_path(reply.user_id) do %>
+        <div>
+          <% if @tweet.user.avatar.attached? %>
+            <%= image_tag(reply.user.avatar, class:'image__circle image__small') %>
+          <% else %>
+            <%= image_tag('default.png', class:'image__circle image__small') %>
+          <% end %>
+        </div>
+      <% end %>
+        <div class="tweet__content">
+          <div class="tweet__head">
+            <%= link_to user_path(reply.user_id) do %>
+              <div class="typo__medium typo__bold color-main"><%= reply.user.name %></div>
+            <% end %>
+            <%= link_to user_path(reply.user_id) do %>
+              <div class="typo__medium typo__regular color-alter">@<%= reply.user.username %></div>
+            <% end %>
+            <div class="typo__small typo__regular color-alter"><%= reply.user.created_at %></div>
+          </div>
+          <%= link_to tweet_path(reply) do %>
+          <p><%= reply.body %></p>
+          <% end %>
+          <div class="tweet__icons">
+          
+            <div class="tweet__icons-right">
+            <%= link_to tweet_path(reply) do %>
+              <%= image_tag 'retweet.svg' %>
+              <span><%= reply.replies.size %></span>
+              <% end %>
+              <div>
+              <% if current_user %>
+                <% pre_like = reply.likes.find { |like| like.user_id == current_user.id} %>
+              <% end %>
+              <% if pre_like %>
+                <%= button_to tweet_like_path(reply, pre_like), method: :delete, class:'tweet__likes' do %>
+                  <%= image_tag 'like.svg' %>
+                <% end %>
+              <% else %>
+                <%= button_to tweet_likes_path(reply), method: :post, class:'tweet__likes' do %>
+                  <%= image_tag 'like.svg' %>
+                <% end %>
+              <% end %>
+            </div>
+              <span><%= reply.likes.size %></span>
+            </div>
+            <div class="tweet__icons-left">
+              <% if policy(reply).update? %>
+                <span><%= link_to edit_tweet_path(reply) do%><%= image_tag 'update.png' %><% end %></span>
+              <% end %>
+              <% if policy(reply).destroy? %>
+                <span><%= link_to tweet_path(reply), method: :delete, data: { confirm: "Are you sure you want to delete this tweet?" } do %> <%= image_tag 'delete.png'%><% end %> </span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+</div>
